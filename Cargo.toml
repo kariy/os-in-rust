@@ -1,0 +1,15 @@
+[package]
+name = "os-in-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+# When a panic happens, by default Rust uses unwinding to run the destructors of all live stack variables.
+# This configuration tells Rust to abort the process immediately when a panic happens.
+# Unwinding is used to run the destructors of all live stack variables when a panic happens.
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
