@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+bootloader = "0.9.0"
 
 # When a panic happens, by default Rust uses unwinding to run the destructors of all live stack variables.
 # This configuration tells Rust to abort the process immediately when a panic happens.

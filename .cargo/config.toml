@@ -1,2 +1,26 @@
 [target.'cfg(target_os = "macos")']
 rustflags = ["-C", "link-args=-e __start -static -nostartfiles"]
+
+[target.'cfg(target_os = "none")']
+runner = "bootimage runner"
+
+
+[unstable]
+# This option tells cargo that it should recompile the `core` and `compiler_builtins` libraries.
+# `compiler_builtin` is required because it is a dependency of `core.
+#
+# You may need to do `rustup component add rust-src` to get the source code for the standard library.
+#
+# This configuration requires rustc >= nightly 2020-07-15
+build-std = ["core", "compiler_builtins"]
+
+# Rust compiler requires certain memory-related functions (e.g., memset, memcpy, memcmp)
+# typically provided by the C library. In a freestanding environment, we enable these
+# in compiler_builtins crate via the "compiler-builtins-mem" feature.
+#
+# Requires rustc >= nightly 2020-09-03
+build-std-features = ["compiler-builtins-mem"]
+
+[build]
+# This tells cargo to build the program for our custom bare metal target.
+target = "x86_64-os_rust.json"
